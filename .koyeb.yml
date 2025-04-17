@@ -1,24 +1,20 @@
 version: "1.0"
+
 services:
   - name: thinkchessy
-    type: app
+    type: web
     build:
       dockerfilePath: Dockerfile
-    env:
-      - name: TELEGRAM_BOT_TOKEN
-        value: "<YOUR_TELEGRAM_BOT_TOKEN>"
     source:
       type: git
-      repo_url: https://github.com/<YOUR_USERNAME>/<YOUR_REPO>.git
+      repo_url: https://github.com/Aryan12x/koyebA2.git
       branch: main
+    env:
+      - name: TELEGRAM_BOT_TOKEN
+        value: "<your_bot_token>"
+    ports:
+      - port: 8080
     scale:
       min: 1
       max: 1
-    health_check:
-      type: http
-      path: /health
-      port: 8080
-      interval: 15s
-      timeout: 5s
-      healthy_threshold: 2
-      unhealthy_threshold: 2
+
