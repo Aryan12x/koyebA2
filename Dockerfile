@@ -1,7 +1,13 @@
-FROM python:3.9-slim
+FROM python:3.10-slim
+
+# Set working directory inside the container
 WORKDIR /app
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy all files to /app
 COPY . .
-EXPOSE 8080
-CMD ["python","main.py"]
+
+# Install required Python packages
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Run your bot using gunicorn on port 8080
+CMD ["gunicorn", "-w", "1", "-b", "0.0.0.0:8080", "main:main"]
